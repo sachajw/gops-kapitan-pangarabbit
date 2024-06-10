@@ -1,0 +1,17 @@
+classes:
+  - common
+
+parameters:
+  gitlab:
+    chart_name: gitlab
+    chart_version: 8.0.1
+    chart_dir: system/sources/charts${gitlab:chart_name}.${loki:chart_version}/${gitlab:application_version}
+    application_version: 17.0.1
+
+kapitan:
+  dependecies:
+    - type: helm
+      output_path: ${gitlab:chart_dir}
+      source: http://charts.gitlab.io
+      version: ${gitlab:chart_version}
+      chart_name: ${gitlab:chart_name}

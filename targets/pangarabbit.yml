@@ -1,0 +1,5 @@
+classes:
+  - common
+  - kubernetes.gitlab
+  - kubernetes.ortelius
+  - profile.dev
