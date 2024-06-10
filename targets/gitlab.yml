@@ -15,3 +15,13 @@ kapitan:
       source: http://charts.gitlab.io
       version: ${gitlab:chart_version}
       chart_name: ${gitlab:chart_name}
+
+  compile:
+    - output_path: .
+      input_type: helm
+      input_paths:
+        - ${gitlab:chart_dir}
+      helm_values: {}
+      helm_params:
+        name: ${gitlab:chart_name}
+        namespace: ${gitlab:namespace}
