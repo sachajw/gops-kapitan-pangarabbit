@@ -1,0 +1,37 @@
+classes:
+  - common
+  - gitlab
+
+parameters:
+  gitlab:
+    chart_name: gitlab
+    chart_version: 8.0.1
+    chart_dir: system/sources/charts${gitlab:chart_name}.${gitlab:chart_version}/${gitlab:application_version}
+    application_version: 17.0.1
+
+kapitan:
+  dependecies:
+    - type: helm
+      output_path: ${gitlab:chart_dir}
+      source: http://charts.gitlab.io
+      version: ${gitlab:chart_version}
+      chart_name: ${gitlab:chart_name}
+
+charts:
+  gitlab:
+    chart_dir: ${gitlab:chart_dir}
+    helm_params:
+      namespace: ${gitlab:namespace}
+      name: gitlab
+      output_file: ${gitlab:chart_name}.yml
+    helm_values: ${gitlab:helm_values}
+
+  # compile:
+  #   - output_path: .
+  #     input_type: helm
+  #     input_paths:
+  #       - ${gitlab:chart_dir}
+  #     helm_values: ${gitlab:helm_values}
+  #     helm_params:
+  #       name: ${gitlab:chart_name}
+  #       namespace: ${gitlab:namespace}
